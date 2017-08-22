@@ -1,0 +1,49 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+   $(document).ready(function(){
+    
+    $('#searchTerm').keyup(function()
+     {
+        var searchTerm=$('#searchTerm').val();
+        $("ul").empty();
+        
+       //var Url="https://en.wikipedia.org/w/api.php?action=opensearch&search="+searchTerm+"&callback=?&origin=*&searchTerm";
+
+        var Url="https://en.wikipedia.org/w/api.php?action=opensearch&search="+ searchTerm +"&format=json&origin=*&searchTerm&callback=?";
+
+          $.getJSON(Url, function(data){
+
+            for(var i=0;i<data[1].length;i++)
+  	 		{
+  	 			$("ul").append("<li><a href=\""+data[3][i]+"\" target=\"_blank\">"+data[1][i]+"</a></li>");
+  	 		}
+
+        });
+
+     });
+});
+
+  </script>
+</head>
+<body>
+ <div class="container">
+ <h1>Wikipedia Api Search</h1>
+ <h4>FCC Front End Deveopment</h4>
+    <center>
+    <a href="https://en.Wikipedia.org/wiki/Special:Random" target="blank">
+    	 <img src="wiki.png" height="250" width="600" />
+    </a>
+    </center>
+<input type="textbox" id="searchTerm" style="width: 1000px;height: 30px;">
+<!--<button id="search" class="btn btn-primary">Submit</button>-->
+</div>
+<div id="rr">
+   <ul style="list-style:none" align="center">
+    </ul>
+    </div>
+</body>
+</html>
